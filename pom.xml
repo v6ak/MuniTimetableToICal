@@ -34,7 +34,7 @@
 		  <artifactId>commons-logging</artifactId>
 		  <version>1.1.1</version>
 		</dependency>
-		<dependency>
+		<dependency> <!-- This is not used directly, but it is required by iCal4J, although it does not seem to be listed in iCal4J's dependencies. :( -->
 		  <groupId>commons-lang</groupId>
 		  <artifactId>commons-lang</artifactId>
 		  <version>2.4</version>
