@@ -1,0 +1,16 @@
+This app converts the XML timetable from https://is.muni.cz/auth/rozvrh/ to iCalendar format.
+
+It can be useful for:
+* automatic profile management on your phone
+* dicsovering event collision when planning an appointment
+* having the timetable on your phone
+
+This app is not well-tuned, so:
+* It is controlled from console. It has no GUI.
+* It does not work correctly with some characters, that are entitized (e.g. &nbsp;).
+* It does not check the input much.
+* Output generation is horribly written, but the main reason is a horrible library.
+* The app assumes that every event is once a week, so you have to modify other events.
+* The events start from this week. But I think that this is good enough.
+
+Feel free to improve this app :)
