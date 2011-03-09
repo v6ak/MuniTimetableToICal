@@ -3,16 +3,15 @@ package v6ak.tools.muni.timetableToICal
 import resource.managed
 import xml.XML
 import Console.err
-import java.util.{Calendar => JCalendar}
 import net.fortuna.ical4j.model.component.VEvent
 import org.scala_tools.time.Imports._
 import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.{Date=>JDate}
 import net.fortuna.ical4j.model.property._
-import net.fortuna.ical4j.model.{Property, Dur, Recur, Date, Calendar, DateTime => IDateTime}
+import net.fortuna.ical4j.model.{Property=>IProperty, Dur, Recur, Date=>IDate, Calendar=>ICalendar, DateTime => IDateTime}
 
-class MyDtStart(dateTime:DateTime) extends Property("DTSTART"){ // Chro chro. Ale jinak mi to fakt nešlo.
+class MyDtStart(dateTime:IDateTime) extends IProperty("DTSTART"){ // Chro chro. Ale jinak mi to fakt nešlo.
 	var value = dateTime.toString+"Z"
 	def getValue = value
 	def setValue(x:String){value = x}
@@ -48,11 +47,11 @@ object App {
 			System exit 1
 		}
 
-		val until = new Date(new SimpleDateFormat("y-M-d").parse(args(2)).getTime+24*60*60*1000)
+		val until = new IDate(new SimpleDateFormat("y-M-d").parse(args(2)).getTime+24*60*60*1000)
 		val from = args(0)
 		val to = args(1)
 		val xml = XML loadFile from
-		val calendar = new Calendar
+		val calendar = new ICalendar
 
 		val startDate = DateTime.now
 		def date(day:Int, time: String) = {
@@ -75,7 +74,7 @@ object App {
 				val name = (akce\"nazev").text
 				val fromMilis = date(day, fromTime)
 				val toMilis = date(day, toTime)
-				val event = new VEvent(new Date(new JDate(fromMilis)), new Dur(new JDate(fromMilis), new JDate(toMilis)), code+"@"+place+": "+name)
+				val event = new VEvent(new IDate(new JDate(fromMilis)), new Dur(new JDate(fromMilis), new JDate(toMilis)), code+"@"+place+": "+name)
 				List(
 					"DTSTAMP",
 					"DTSTART"
