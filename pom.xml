@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>v6ak.tools</groupId>
 	<artifactId>MuniTimetableToICal</artifactId>
-	<version>1.0-SNAPTHOT</version>
+	<version>0.8</version>
 	<name>${project.artifactId}</name>
 	<description>Converts XML timetable from is.muni.cz to iCalendar format</description>
 	<licenses>
