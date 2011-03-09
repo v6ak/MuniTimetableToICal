@@ -89,7 +89,6 @@ object App {
 					event.getProperties.add(_)
 				}
 				calendar.getComponents add event
-				println(day + " "+fromTime + " - "+toTime+" ["+place+"] "+code+": "+name)
 			}
 		}
 		for(out <- managed(new FileWriter(to))){
