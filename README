@@ -14,3 +14,13 @@ This app is not well-tuned, so:
 * The events start from this week. But I think that this is good enough.
 
 Feel free to improve this app :)
+
+== How to build ==
+The only prerequisity is Maven. I use Maven 3, but Maven 2 is probably also OK.
+Following command creates executable JAR file in target and downloads all dependencies if needed:
+mvn package
+Downloading all dependencies can take some time when building such project the first time.
+
+== How to run it ==
+You have to have installed Java Runtime Environment. I use (and recommend) Oracle/Sun JRE 1.6.*, but it will probably work with another implementations.
+You can run in by calling java -jar MuniTimetableToICal-<VERSION>-jar-with-dependencies.jar <parameters> assuming that you don't have renamed the archive.

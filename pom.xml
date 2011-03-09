@@ -25,19 +25,19 @@
 			<version>${scala.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>ical4j</groupId>
-		  <artifactId>ical4j</artifactId>
-		  <version>1.0-rc2</version>
+			<groupId>ical4j</groupId>
+			<artifactId>ical4j</artifactId>
+			<version>1.0-rc2</version>
 		</dependency>
 		<dependency> <!-- This is not used directly, but it is required by iCal4J, although it does not seem to be listed in iCal4J's dependencies. :( -->
-		  <groupId>commons-logging</groupId>
-		  <artifactId>commons-logging</artifactId>
-		  <version>1.1.1</version>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency> <!-- This is not used directly, but it is required by iCal4J, although it does not seem to be listed in iCal4J's dependencies. :( -->
-		  <groupId>commons-lang</groupId>
-		  <artifactId>commons-lang</artifactId>
-		  <version>2.4</version>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -72,6 +72,50 @@
 		<sourceDirectory>src/main/scala</sourceDirectory>
 		<testSourceDirectory>src/test/scala</testSourceDirectory>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<archive>
+					<index>true</index>
+					<manifest>
+						<addClasspath>true</addClasspath>
+						<mainClass>v6ak.tools.muni.timetableToICal.App</mainClass>
+					</manifest>
+					<manifestEntries>
+						<mode>development</mode>
+						<url>${pom.url}</url>
+						<key>value</key>
+					</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>v6ak.tools.muni.timetableToICal.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.scala-tools</groupId>
 				<artifactId>maven-scala-plugin</artifactId>
