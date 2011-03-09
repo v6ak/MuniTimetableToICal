@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>v6ak.tools</groupId>
+	<artifactId>MuniTimetableToICal</artifactId>
+	<version>1.0-SNAPTHOT</version>
+	<name>${project.artifactId}</name>
+	<description>Converts XML timetable from is.muni.cz to iCalendar format</description>
+	<licenses>
+		<license>
+			<name>BSD</name>
+		</license>
+	</licenses>
+
+	<properties>
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
+		<encoding>UTF-8</encoding>
+		<scala.version>2.8.1</scala.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<version>${scala.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>ical4j</groupId>
+		  <artifactId>ical4j</artifactId>
+		  <version>1.0-rc2</version>
+		</dependency>
+		<dependency> <!-- This is not used directly, but it is required by iCal4J, although it does not seem to be listed in iCal4J's dependencies. :( -->
+		  <groupId>commons-logging</groupId>
+		  <artifactId>commons-logging</artifactId>
+		  <version>1.1.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>commons-lang</groupId>
+		  <artifactId>commons-lang</artifactId>
+		  <version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.jsuereth.scala-arm</groupId>
+			<artifactId>scala-arm_2.8.1</artifactId>
+			<version>0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.scala-tools.time</groupId>
+			<artifactId>time_2.8.1</artifactId>
+			<version>0.3</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>JA-SIG</id>
+			<url>http://developer.jasig.org/repo/content/groups/m2-legacy/</url>
+		</repository>
+		<repository>
+			<id>Scala Tools</id>
+			<url>http://scala-tools.org/repo-releases/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<sourceDirectory>src/main/scala</sourceDirectory>
+		<testSourceDirectory>src/test/scala</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.scala-tools</groupId>
+				<artifactId>maven-scala-plugin</artifactId>
+				<version>2.15.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<args>
+								<arg>-make:transitive</arg>
+								<arg>-dependencyfile</arg>
+								<arg>${project.build.directory}/.scala_dependencies</arg>
+							</args>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<useFile>false</useFile>
+					<disableXmlReport>true</disableXmlReport>
+					<!-- If you have classpath issue like NoDefClassError,... -->
+					<!-- useManifestOnlyJar>false</useManifestOnlyJar -->
+					<includes>
+						<include>**/*Test.*</include>
+						<include>**/*Suite.*</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
