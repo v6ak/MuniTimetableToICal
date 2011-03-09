@@ -62,6 +62,7 @@ object App {
 			val d = startDate.withDayOfWeek(day).withTime(timeParts(0).toInt, timeParts(1).toInt, 0, 0)
 			d.getMillis
 		}
+
 		xml\"tabulka"\"den" foreach { den =>
 			val dayName = den.attribute("id").get.toString
 			val day = Days(dayName)
@@ -88,7 +89,7 @@ object App {
 				) foreach {
 					event.getProperties.add(_)
 				}
-				calendar.getComponents add event
+				calendar.getComponents.add(event)
 			}
 		}
 		for(out <- managed(new FileWriter(to))){
