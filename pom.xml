@@ -4,7 +4,7 @@
 	<artifactId>MuniTimetableToICal</artifactId>
 	<version>0.8</version>
 	<name>${project.artifactId}</name>
-	<description>Converts XML timetable from is.muni.cz to iCalendar format</description>
+	<description>Converts XML timetable from https://is.muni.cz/auth/rozvrh/ to iCalendar (ics) format.</description>
 	<licenses>
 		<license>
 			<name>BSD</name>
