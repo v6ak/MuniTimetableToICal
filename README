@@ -12,6 +12,8 @@ This app is not well-tuned, so:
 * Output generation is horribly written, but the main reason is a horrible library.
 * The app assumes that every event is once a week, so you have to modify other events.
 * The events start from this week. But I think that this is good enough.
+* I'm not sure if it works well with timezones. You should check the time, especially if you are using a timezone that is different from MUNI's timezone (i.e. Europe/Prague).
+* You also should check if it works well with DST (Daylight Saving Time).
 
 Feel free to improve this app :)
 

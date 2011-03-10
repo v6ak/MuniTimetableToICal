@@ -3,16 +3,15 @@ package v6ak.tools.muni.timetableToICal
 import resource.managed
 import xml.XML
 import Console.err
-import net.fortuna.ical4j.model.component.VEvent
 import org.scala_tools.time.Imports._
 import java.io.FileWriter
 import java.text.SimpleDateFormat
 import java.util.{Date=>JDate}
 import net.fortuna.ical4j.model.property._
-import net.fortuna.ical4j.model.{Property=>IProperty, Dur, Recur, Date=>IDate, Calendar=>ICalendar, DateTime => IDateTime}
+import net.fortuna.ical4j.model.component.VEvent
+import net.fortuna.ical4j.model.{Property => IProperty, Dur, Recur, Date => IDate, Calendar => ICalendar, DateTime => IDateTime}
 
-class MyDtStart(dateTime:IDateTime) extends IProperty("DTSTART"){ // Chro chro. Ale jinak mi to fakt nešlo.
-	var value = dateTime.toString+"Z"
+class MyComponent(name:String, var value:String) extends IProperty(name){ // Chro chro. Ale jinak mi to fakt nešlo.
 	def getValue = value
 	def setValue(x:String){value = x}
 	def validate(){}
@@ -42,7 +41,7 @@ object App {
 
 	def main(args : Array[String]) {
 		if(args.length != 3){
-			err println "usage: <appLauncher> from dateTo"
+			err println "usage: <appLauncher> sourceXmlFile targetIcsFile dateTo"
 			err println "dateTo: YYYY-MM-DD"
 			System exit 1
 		}
@@ -83,8 +82,8 @@ object App {
 					event.getProperties.removeAll(event.getProperties(name))
 				}
 				List(
-					new DtStamp(new IDateTime(fromMilis)),
-					new MyDtStart(new IDateTime(fromMilis)),
+					new MyComponent("DTSTAMP;TZID=Europe/Prague", new IDateTime(fromMilis).toString+"Z"),
+					new MyComponent("DTSTART;TZID=Europe/Prague", new IDateTime(fromMilis).toString+"Z"),
 					new RRule(new Recur(Recur.WEEKLY, until))
 				) foreach {
 					event.getProperties.add(_)
